@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tamaka</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Noto+Sans+Arabic:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<!-- Plyr: professional player styles -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+<style>
+:root{--bg:#14112e;--bg2:#1d1a42;--ink:#f4f1ff;--mute:#a9a3d6;--a:#3de0c5;--b:#ff6b8b;--line:#34306b;--on:#08201c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f4ff;--bg2:#e9e6fb;--ink:#1a1740;--mute:#5d5890;--line:#d2cdee;--a:#17b8a0}}
+:root[data-theme="light"]{--bg:#f6f4ff;--bg2:#e9e6fb;--ink:#1a1740;--mute:#5d5890;--line:#d2cdee;--a:#17b8a0}
+:root[data-theme="dark"]{--bg:#14112e;--bg2:#1d1a42;--ink:#f4f1ff;--mute:#a9a3d6;--line:#34306b;--a:#3de0c5}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New","Noto Sans Arabic",system-ui,sans-serif;padding-bottom:84px;line-height:1.5}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 6px;font-weight:900;font-size:1.5rem;letter-spacing:.02em}
+.top span{color:var(--b)}
+h1{font-weight:900;font-size:1.7rem;line-height:1.15;margin:0 0 6px}
+h2{font-size:1.05rem;font-weight:700;margin:22px 16px 10px}
+.pt{margin:10px 16px 12px}
+.mu{color:var(--mute);font-size:.85rem;margin:0 0 8px}
+.em{margin:24px 16px;color:var(--mute)}
+.p{position:relative;aspect-ratio:2/3;border-radius:var(--rad,10px);overflow:hidden;background:linear-gradient(165deg,hsl(var(--h) 65% 48%),hsl(calc(var(--h) + 40) 60% 16%));display:flex;align-items:flex-end;padding:8px;color:#fff}
+.p i{position:absolute;right:-4px;top:-8px;font-size:5.5rem;font-weight:900;line-height:1;opacity:.22;font-style:normal}
+.p b{position:relative;font-size:.8rem;line-height:1.2}
+.r{display:flex;gap:10px;overflow-x:auto;padding:0 16px 4px}
+.g{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:0 16px}
+.c{background:none;border:0;text-align:left;width:128px;flex:none;padding:0}
+.g .c{width:auto}
+.c small{display:block;margin-top:5px;color:var(--mute);font-size:.72rem}
+.c u{display:block;position:relative;height:3px;margin-top:5px;background:var(--line);border-radius:2px}
+.c u::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--a);border-radius:2px}
+.hero{position:relative;margin:6px 16px 4px;border-radius:16px;overflow:hidden;min-height:350px;display:flex;align-items:flex-end;padding:20px;color:#fff;background:linear-gradient(165deg,hsl(var(--h) 65% 46%),hsl(calc(var(--h) + 40) 60% 14%))}
+.hero>i{position:absolute;right:-20px;top:-30px;font-size:15rem;font-weight:900;line-height:1;opacity:.2;font-style:normal}
+.hero div{position:relative}
+.hero p{margin:0 0 12px;max-width:34ch}
+.bt{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.pb,.gb{border-radius:999px;padding:11px 20px;font-weight:700;border:2px solid var(--a)}
+.pb{background:var(--a);color:var(--on)}
+.gb{background:transparent;color:inherit;border-color:currentColor}
+input[type=search]{display:block;width:calc(100% - 32px);margin:0 16px 12px;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font:inherit}
+.ch{display:flex;gap:8px;overflow-x:auto;padding:0 16px 14px}
+.ch button{flex:none;padding:7px 14px;border-radius:999px;background:var(--bg2);border:1px solid var(--line)}
+.ch button.on{background:var(--b);border-color:var(--b);color:#2a0612;font-weight:700}
+.s{display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:0 16px 8px;padding:8px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;text-align:left}
+.s .p{width:44px;flex:none;padding:0}
+.s .p i{font-size:2.2rem;right:2px;top:0}
+.s .p b{display:none}
+.s strong{display:block;font-size:.95rem}
+.s small{color:var(--mute)}
+nav{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(5,1fr);background:var(--bg2);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{background:none;border:0;padding:10px 0;color:var(--mute);font-size:.76rem}
+nav button.on{color:var(--a);font-weight:700}
+.ov{position:fixed;inset:0;overflow:auto;background:var(--bg);z-index:10;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.ov[hidden]{display:none}
+.z2{z-index:20;background:#000;color:#fff}
+.x{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:12px;z-index:2;padding:8px 14px;border-radius:999px;border:0;background:rgba(0,0,0,.55);color:#fff}
+.dh,.scr{position:relative;height:300px;overflow:hidden;background:linear-gradient(165deg,hsl(var(--h) 65% 46%),hsl(calc(var(--h) + 40) 60% 14%))}
+.dh i,.scr i{position:absolute;right:-10px;top:-20px;font-size:13rem;font-weight:900;line-height:1;opacity:.2;font-style:normal;color:#fff}
+.db,.ct{padding:16px}
+.ep{display:flex;align-items:center;gap:12px;width:100%;padding:12px 4px;background:none;border:0;border-bottom:1px solid var(--line);text-align:left}
+.ep span{width:28px;color:var(--a);font-weight:700}
+.ep em{margin-left:auto;color:var(--mute);font-style:normal;font-size:.8rem}
+.scr{height:240px}
+.bar{height:5px;background:#444;border-radius:3px;margin:14px 0}
+.bar u{display:block;height:100%;width:0;background:var(--b);border-radius:3px}
+[dir=rtl] .c,[dir=rtl] .s,[dir=rtl] .ep{text-align:right}
+[dir=rtl] .ep em{margin-left:0;margin-right:auto}
+.ef{position:relative;width:100%;aspect-ratio:16/9;margin-top:56px;background:#000}.ef iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vd{width:100%;max-height:60vh;background:#000;display:block;margin-top:56px}
+.cp{position:fixed;left:0;right:0;bottom:0;max-height:62vh;overflow:auto;background:var(--bg2);border-top:1px solid var(--line);z-index:30;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));border-radius:16px 16px 0 0}
+.cp label{display:block;margin-top:10px;color:var(--mute);font-size:.85rem}
+.cp input,.cp select{display:block;width:100%;margin-top:4px;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.cp input[type=color]{height:40px;padding:2px}
+[style*="url("] i{display:none}
+.p b{text-shadow:0 1px 6px #000}
+.vh{position:fixed;left:-9999px;opacity:0;width:1px;height:1px}
+.lb{display:inline-block;margin-top:8px;margin-inline-end:8px;cursor:pointer}
+#so{display:block;width:calc(100% - 32px);margin:0 16px 12px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font:inherit}
+.sg{margin:0 16px 10px;padding:12px;background:var(--bg2);border:1px solid var(--line);border-radius:12px}
+.sg h2{margin:0 0 10px}
+.sg .ch{padding:0 0 8px;flex-wrap:wrap}
+.sg .gb{margin:0 8px 8px 0;padding:8px 16px}
+.st5{display:flex;gap:2px;margin-bottom:10px}
+.st5 button{background:none;border:0;font-size:1.7rem;line-height:1;color:var(--line);padding:2px}
+.st5 button.on{color:#ffc857}
+.sg input,.sg select,.sg textarea{display:block;width:100%;margin:0 0 10px;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.sg .mu{margin:0 0 4px}
+.sg>.gb[data-de]{display:block;width:100%;text-align:start}
+.sw{display:flex;justify-content:space-between;padding:6px 0}
+:root[data-theme="glass"]{--bg:#0d0b24;--bg2:rgba(255,255,255,.13);--ink:#fff;--mute:#d9d5f7;--line:rgba(255,255,255,.24);--a:#7ee8ff;--b:#ff8fb1;--on:#04141a}
+:root[data-theme="glass"] body{background:radial-gradient(900px 600px at 12% 8%,#6a4bff 0%,transparent 60%),radial-gradient(800px 600px at 92% 30%,#ff5fa2 0%,transparent 55%),radial-gradient(900px 700px at 40% 100%,#1fc8d8 0%,transparent 60%),#0d0b24;background-attachment:fixed}
+:root[data-theme="glass"] .ov{background:radial-gradient(900px 600px at 12% 8%,#6a4bff 0%,transparent 60%),radial-gradient(800px 600px at 92% 30%,#ff5fa2 0%,transparent 55%),#0d0b24}
+:root[data-theme="glass"] .z2{background:#000}
+:root[data-theme="glass"] nav,:root[data-theme="glass"] .s,:root[data-theme="glass"] .sg,:root[data-theme="glass"] .cp,:root[data-theme="glass"] .ch button,:root[data-theme="glass"] input[type=search],:root[data-theme="glass"] #so,:root[data-theme="glass"] .gb,:root[data-theme="glass"] .x{-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 8px 24px rgba(0,0,0,.18)}
+:root[data-theme="glass"] nav{background:rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.25)}
+:root[data-theme="glass"] .gb{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.45)}
+:root[data-theme="glass"] .sg input,:root[data-theme="glass"] .sg select,:root[data-theme="glass"] .sg textarea,:root[data-theme="glass"] .cp input,:root[data-theme="glass"] .cp select{background:rgba(255,255,255,.1)}
+:root[data-theme="glass"] .p,:root[data-theme="glass"] .hero{box-shadow:0 8px 24px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.2)}
+.mr{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 4px;background:none;border:0;border-bottom:1px solid var(--line);font-size:1rem;text-align:start}.sg .mr:last-child{border-bottom:0}.mr i{font-style:normal;color:var(--mute)}.mr i::before{content:'›';font-size:1.4rem}[dir=rtl] .mr i::before{content:'‹'}
+:root[data-theme="clear"]{--bg:#1c1c1e;--bg2:rgba(255,255,255,.16);--ink:#fff;--mute:#dcdcdc;--line:rgba(255,255,255,.3);--a:#fff;--b:#fff;--on:#111}
+:root[data-theme="clear"] body{background:radial-gradient(900px 600px at 15% 5%,#8a8a8e 0%,transparent 60%),radial-gradient(800px 600px at 90% 40%,#5a5a5e 0%,transparent 55%),radial-gradient(900px 700px at 40% 100%,#7a7a7e 0%,transparent 60%),#1c1c1e;background-attachment:fixed}
+:root[data-theme="clear"] .ov{background:radial-gradient(900px 600px at 15% 5%,#8a8a8e 0%,transparent 60%),#1c1c1e}
+:root[data-theme="clear"] .z2{background:#000}
+:root[data-theme="clear"] nav,:root[data-theme="clear"] .s,:root[data-theme="clear"] .sg,:root[data-theme="clear"] .cp,:root[data-theme="clear"] .ch button,:root[data-theme="clear"] input[type=search],:root[data-theme="clear"] #so,:root[data-theme="clear"] .gb,:root[data-theme="clear"] .x{-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 8px 24px rgba(0,0,0,.18)}
+:root[data-theme="clear"] nav{background:rgba(255,255,255,.2);border-top:1px solid rgba(255,255,255,.4)}
+:root[data-theme="clear"] .gb{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.45)}
+:root[data-theme="clear"] .sg input,:root[data-theme="clear"] .sg select,:root[data-theme="clear"] .sg textarea,:root[data-theme="clear"] .cp input,:root[data-theme="clear"] .cp select{background:rgba(255,255,255,.1)}
+:root[data-theme="clear"] .p,:root[data-theme="clear"] .hero{box-shadow:0 8px 24px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.2)}
+.mr{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 4px;background:none;border:0;border-bottom:1px solid var(--line);font-size:1rem;text-align:start}.sg .mr:last-child{border-bottom:0}.mr i{font-style:normal;color:var(--mute)}.mr i::before{content:'›';font-size:1.4rem}[dir=rtl] .mr i::before{content:'‹'}
+:root[data-theme="clear"] .ch button.on{background:#fff;color:#111;border-color:#fff}
+:root[data-theme="clear"] .c u::after,:root[data-theme="clear"] .bar u{background:#fff}
+:root[data-theme="clear"] .st5 button.on{color:#fff}
+.hs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.hs::-webkit-scrollbar{display:none}.hs .hero{flex:0 0 calc(100% - 32px);scroll-snap-align:center}
+#nm{font-family:'Bebas Neue','Zen Kaku Gothic New',Impact,sans-serif;font-size:2.7rem;font-weight:400;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:var(--b);text-shadow:0 2px 0 rgba(0,0,0,.35),0 0 18px color-mix(in srgb,var(--b) 45%,transparent)}
+.top>div>span{display:none}
+.top>div{display:flex;align-items:baseline}
+/* Plyr inside the app */
+.plyr{--plyr-color-main:var(--b);width:100%;max-height:60vh;margin-top:56px}
+.plyr video{max-height:60vh}
+#pl>video{width:100%;max-height:60vh;background:#000;display:block;margin-top:56px}
+.iframe-container{width:100%;margin-top:56px;background:#000}
+.iframe-container iframe{width:100%;height:100%;border:0}
+</style>
+</head>
+<body>
+<header class="top"><div><b id="nm">Tamaka</b><span>.</span></div><button id="cb" class="gb" style="padding:5px 14px;font-size:.8rem;margin-inline-start:auto;margin-inline-end:8px" hidden>Customize</button><button id="lg" class="gb" style="padding:5px 14px;font-size:.8rem">English</button></header>
+<p id="st" class="mu" style="margin:0 16px"></p><main id="v"></main>
+<nav aria-label="Main">
+<button data-v="home">Home</button><button data-v="browse">Browse</button><button data-v="sched">Schedule</button><button data-v="list">My List</button><button data-v="set">Settings</button>
+</nav>
+<div id="d" class="ov" hidden></div>
+<div id="pl" class="ov z2" hidden></div>
+<div id="cu" class="cp" hidden></div>
+<input id="fp" class="vh" type="file" accept="image/*"><input id="fi" class="vh" type="file" accept="application/json"><input id="fv" class="vh" type="file" accept="video/*">
+<!-- Plyr library -->
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+<script>
+const D=[
+["Attack on Titan","Action",10,"進",87,"Humanity lives behind giant walls to hide from man-eating titans, until a boy vows to wipe them out after the walls are breached."],
+["Death Note","Mystery",280,"死",37,"A student finds a notebook that kills anyone whose name is written in it, and a genius detective starts closing in."],
+["Fullmetal Alchemist: Brotherhood","Adventure",35,"錬",64,"Two brothers search for the Philosopher’s Stone to undo a failed alchemy ritual, and uncover a conspiracy behind their country."],
+["Jujutsu Kaisen","Action",260,"呪",24,"A high schooler swallows a cursed object and joins a school of sorcerers who fight curses in secret."],
+["Spy x Family","Comedy",340,"偽",25,"A spy builds a fake family for a mission, not knowing his adopted daughter reads minds and his wife is an assassin."],
+["Cowboy Bebop","Sci-fi",200,"空",26,"A crew of bounty hunters drifts through space in 2071, chasing criminals and running from their own pasts."],
+["Steins;Gate","Sci-fi",130,"運",24,"A self-styled mad scientist discovers a way to send messages to the past, and every change comes at a cost."],
+["Hunter x Hunter","Adventure",95,"狩",148,"A boy sets out to become a Hunter and find his father, facing deadly exams and stranger rivals along the way."]
+];
+const $=s=>document.querySelector(s);
+const K='桜花雪風雷光影龍鬼夢海空心刃';
+const E=[['Naruto','Action',220,'A lonely young ninja dreams of becoming the leader of his village.'],['Naruto Shippuden','Action',500,'Now older, Naruto faces a dark organization hunting his friend.'],['Bleach','Action',366,'A teenager gains the powers of a soul reaper and defends the living.'],['One Piece','Adventure',1100,'A rubber-bodied pirate sails with his crew to find the ultimate treasure.'],['Dragon Ball Z','Action',291,'Goku and his friends defend Earth against waves of powerful invaders.'],['My Hero Academia','Action',138,'In a world of superpowers, a powerless boy inherits the greatest hero’s gift.'],['Demon Slayer','Action',26,'A boy becomes a demon slayer to cure his sister.'],['One Punch Man','Comedy',24,'A hero who wins every fight with one punch is bored of winning.'],['Fairy Tail','Fantasy',328,'A rowdy wizard guild takes on jobs and dark threats together.'],['Sword Art Online','Fantasy',25,'Thousands are trapped in a virtual reality game where death is real.'],['Tokyo Ghoul','Action',12,'A student is turned half-ghoul and must live between two worlds.'],['Code Geass','Sci-fi',25,'An exiled prince gains a mysterious power to command anyone and fights an empire.'],['Neon Genesis Evangelion','Sci-fi',26,'Teenagers pilot giant machines to stop mysterious beings from destroying Earth.'],['Fruits Basket','Romance',25,'A kind girl discovers a family cursed to turn into zodiac animals.'],['Your Lie in April','Drama',22,'A broken pianist meets a free-spirited violinist who brings music back to him.'],['Clannad','Drama',23,'A delinquent student helps the people around him and finds a family of his own.'],['Haikyu!!','Sports',25,'A short boy with huge ambition joins a volleyball team to fly.'],['Kuroko’s Basketball','Sports',25,'A phantom sixth man joins a rising team to beat his former teammates.'],['Mob Psycho 100','Comedy',12,'A powerful esper tries to live a normal life while keeping his emotions in check.'],['Vinland Saga','Action',24,'A young warrior seeks revenge among Vikings, then searches for a different path.'],['Chainsaw Man','Action',12,'A broke devil hunter merges with his pet devil and fights for a normal life.'],['Black Clover','Fantasy',170,'A boy born without magic aims to become the Wizard King.'],['Fire Force','Action',24,'Special firefighters battle people turned into flaming monsters.'],['Dr. Stone','Sci-fi',24,'Humanity is petrified for thousands of years, and a genius rebuilds civilization with science.'],['The Promised Neverland','Mystery',12,'Orphans at a perfect home uncover the terrible truth behind it.'],['Re:Zero','Fantasy',25,'A boy in another world returns to life each time he dies.'],['Konosuba','Comedy',10,'A reincarnated hero is stuck with the most useless party in the world.'],['That Time I Got Reincarnated as a Slime','Fantasy',24,'A man reborn as a slime builds a nation of monsters.'],['Overlord','Fantasy',13,'A gamer is trapped as his powerful character when his favorite game shuts down.'],['Gintama','Comedy',201,'A lazy samurai takes odd jobs in an alien-occupied Edo.'],['Toradora!','Romance',25,'Two classmates team up to win over their crushes and fall for each other.'],['Kaguya-sama: Love Is War','Romance',12,'Two genius students refuse to confess first and plot to make the other do it.'],['Horimiya','Romance',13,'Two classmates discover each other’s hidden sides outside school.'],['Violet Evergarden','Drama',13,'A former soldier writes letters for others while learning what love means.'],['Mushishi','Fantasy',26,'A wandering healer helps people troubled by ancient spirits.'],['Monster','Mystery',74,'A surgeon hunts the patient he saved who became a killer.'],['Psycho-Pass','Sci-fi',22,'In a future that measures crime by brain scan, a rookie questions the system.'],['Ouran High School Host Club','Comedy',26,'A scholarship girl pays off a debt by joining a club of wealthy boys.'],['Soul Eater','Action',51,'Weapon partners train to collect souls and stop a rising madness.'],['Fate/Zero','Fantasy',25,'Seven mages summon legendary heroes to fight for the Holy Grail.'],['Parasyte: The Maxim','Sci-fi',24,'A boy shares his body with an alien parasite living in his hand.'],['Blue Lock','Sports',24,'Strikers compete in a brutal program to create Japan’s best forward.'],['Bocchi the Rock!','Comedy',12,'A painfully shy girl joins a band and dreams of performing.'],['Frieren: Beyond Journey’s End','Fantasy',28,'An elf mage retraces her old journey after her hero companions are gone.'],['Solo Leveling','Action',12,'The weakest hunter gains a secret power that lets him level up alone.'],['Dandadan','Comedy',12,'A girl and an occult-obsessed boy collide with ghosts and aliens.'],['Oshi no Ko','Drama',11,'A doctor is reborn as the child of his favorite idol.'],['Cyberpunk: Edgerunners','Sci-fi',10,'A street kid chooses the dangerous life of a mercenary in Night City.'],['Made in Abyss','Adventure',13,'A girl descends into a vast pit in search of her mother.'],['Slam Dunk','Sports',101,'A delinquent joins his school’s basketball team to impress a girl and finds a passion.']];
+/* AniList ids (d[6]) for the first 8 series; others are looked up by title */
+[16498,1535,5114,113415,140960,1,9253,11061].forEach((x,j)=>{D[j][6]=x});
+D.push(...E.map((e,j)=>[e[0],e[1],(j*47+20)%360,K[j%K.length],e[2],e[3]]));
+let LN='ar',TH='dark',AP=true,RT={},PS={};try{LN=localStorage.getItem('yoru-lang')||(localStorage.getItem('yoru-ar')=='0'?'en':'ar');TH=localStorage.getItem('yoru-th')||'dark';AP=localStorage.getItem('yoru-ap')!='0';RT=JSON.parse(localStorage.getItem('yoru-rt')||'{}');PS=JSON.parse(localStorage.getItem('yoru-ps')||'{}')}catch(e){}
+let AR=LN=='ar';const LS=['ar','en','fr','es','tr'],LNM={ar:'العربية',en:'English',fr:'Français',es:'Español',tr:'Türkçe'},BK=['yoru-al','yoru-et','yoru-list','yoru-w','yoru-h','yoru-rt','yoru-ps','yoru-cfg','yoru-th','yoru-ap','yoru-lang','yoru-ev','yoru-fb','yoru-cc'],sv=(k,v)=>{try{localStorage.setItem(k,typeof v=='string'?v:JSON.stringify(v))}catch(e){}};
+const GA={All:'الكل',Action:'أكشن',Adventure:'مغامرة',Comedy:'كوميديا',Drama:'دراما',Fantasy:'فانتازيا',Mystery:'غموض',Romance:'رومانسية',Sports:'رياضة','Sci-fi':'خيال علمي'};
+const GK=['All','Action','Adventure','Comedy','Drama','Fantasy','Mystery','Romance','Sports','Sci-fi'],GL={};Object.entries({fr:'Tous,Action,Aventure,Comédie,Drame,Fantastique,Mystère,Romance,Sport,Science-fiction',es:'Todos,Acción,Aventura,Comedia,Drama,Fantasía,Misterio,Romance,Deportes,Ciencia ficción',tr:'Tümü,Aksiyon,Macera,Komedi,Dram,Fantezi,Gizem,Romantik,Spor,Bilim kurgu'}).forEach(([l,v])=>{GL[l]=Object.fromEntries(v.split(',').map((x,j)=>[GK[j],x]))});
+const gn=x=>AR?GA[x]||x:(GL[LN]||{})[x]||x;
+const AS=['تعيش البشرية خلف أسوار عملاقة تحميها من العمالقة آكلي البشر، حتى يقسم فتى على إبادتهم بعد اختراق الأسوار.','طالب يجد دفترًا يقتل كل من يُكتب اسمه فيه، ويبدأ محقق عبقري بملاحقته.','أخوان يبحثان عن حجر الفلاسفة لإصلاح ما أفسدته تجربة كيمياء، ويكتشفان مؤامرة تهدد بلدهما.','طالب ثانوي يبتلع غرضًا ملعونًا وينضم إلى مدرسة سحرة يحاربون اللعنات سرًّا.','جاسوس يكوّن عائلة مزيفة لمهمة، دون أن يعلم أن ابنته بالتبني تقرأ الأفكار وأن زوجته قاتلة.','طاقم صيادي جوائز يجوب الفضاء عام 2071 ويلاحق المجرمين وهو يهرب من ماضيه.','عالم يدّعي الجنون يكتشف طريقة لإرسال رسائل إلى الماضي، وكل تغيير له ثمن.','فتى ينطلق ليصبح صائدًا ويجد والده، فيواجه اختبارات قاتلة وخصومًا غريبين.'];
+const syn=i=>AR&&AS[i]||D[i][5];
+const t=s=>AR?({Pause:'إيقاف مؤقت',Play:'تشغيل'})[s]:tr('>'+s+'<').slice(1,-1);
+const NE={home:'Home',browse:'Browse',sched:'Schedule',list:'My List',set:'Settings'},NA={home:'الرئيسية',browse:'تصفح',sched:'الجدول',list:'قائمتي',set:'الإعدادات'};
+const DY={Sunday:'الأحد',Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت'};
+const RX=[[/Your list is empty\. Open any series and tap Add to My List\./g,'قائمتك فارغة. افتح أي مسلسل واضغط أضف إلى قائمتي.'],[/No titles match\. Clear the search or pick another genre\./g,'لا توجد نتائج. امسح البحث أو اختر نوعًا آخر.'],[/Demo player\. No video is included\./g,'مشغّل تجريبي. لا يوجد فيديو.'],[/Play episode (\d+)/g,'شاهد الحلقة $1'],[/Add to My List/g,'أضف إلى قائمتي'],[/In My List/g,'في قائمتي'],[/Continue watching/g,'تابع المشاهدة'],[/New this season/g,'جديد هذا الموسم'],[/Most watched this week/g,'الأكثر مشاهدة هذا الأسبوع'],[/Search titles/g,'ابحث عن عنوان'],[/>My List</g,'>قائمتي<'],[/>Browse</g,'>تصفح<'],[/>Schedule</g,'>الجدول<'],[/>Episodes</g,'>الحلقات<'],[/>Back</g,'>رجوع<'],[/>Close</g,'>إغلاق<'],[/>Today</g,'>اليوم<'],[/>Pause</g,'>إيقاف مؤقت<'],[/>(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)</g,(m,d)=>'>'+DY[d]+'<'],[/Episode (\d+) at /g,'الحلقة $1 الساعة '],[/, episode (\d+)/g,'، الحلقة $1'],[/Episode (\d+)/g,'الحلقة $1'],[/(\d+) episodes/g,'$1 حلقة'],[/(\d+) min/g,'$1 دقيقة']];
+const tr=h=>(AR?RX:RL[LN]||[]).reduce((a,[r,v])=>a.replace(r,v),h);
+const TR=el=>{if(LN!='en')el.innerHTML=tr(el.innerHTML)};
+const EDIT=false;
+const C0={name:'Tamaka',a:'',b:'',bg:'',rad:10,feat:0};
+let C={...C0},cur=0;try{C={...C0,...JSON.parse(localStorage.getItem('yoru-cfg')||'{}')};if(!C.name||C.name=='Yoru')C.name='Tamaka'}catch(e){}
+const EPV={};let EV={},AE={s:0,n:1};try{EV=JSON.parse(localStorage.getItem('yoru-ev')||'{}')}catch(e){}Object.assign(EPV,EV);
+const lum=h=>{const n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255))/255};
+function applyC(){const s=document.documentElement.style,set=(k,v)=>v?s.setProperty(k,v):s.removeProperty(k);set('--a',C.a);set('--b',C.b);set('--bg',C.bg);set('--rad',C.rad+'px');set('--on',C.a?(lum(C.a)>.55?'#08201c':'#fff'):'');set('--ink',C.bg?(lum(C.bg)>.55?'#1a1740':'#f4f1ff'):'');set('--mute',C.bg?(lum(C.bg)>.55?'#5d5890':'#a9a3d6'):'');$('#nm').textContent=C.name||'Tamaka';document.title=C.name||'Tamaka';$('#cb').hidden=!EDIT;$('#cb').textContent=AR?'تخصيص':'Customize'}
+function saveC(){try{localStorage.setItem('yoru-cfg',JSON.stringify(C))}catch(e){}}
+function CU(){const w=AR?['تخصيص','اسم التطبيق','اللون الرئيسي','اللون الثاني','الخلفية','استدارة الزوايا','العنوان المميز','تم','إعادة ضبط']:['Customize','App name','Main color','Second color','Background','Corner roundness','Featured title','Done','Reset'],o=D.map((d,i)=>`<option value="${i}"${i==C.feat?' selected':''}>${d[0]}</option>`).join('');
+$('#cu').innerHTML=`<h2 style="margin:0 0 4px">${w[0]}</h2><label>${w[1]}<input id="c-name" type="text"></label><label>${w[2]}<input id="c-a" type="color" value="${C.a||'#3de0c5'}"></label><label>${w[3]}<input id="c-b" type="color" value="${C.b||'#ff6b8b'}"></label><label>${w[4]}<input id="c-bg" type="color" value="${C.bg||'#14112e'}"></label><label>${w[5]}<input id="c-rad" type="range" min="0" max="24" value="${C.rad}"></label><label>${w[6]}<select id="c-f">${o}</select></label><div class="bt"><button class="pb" data-x="cu">${w[7]}</button><button class="gb" id="c-reset">${w[8]}</button></div>`;$('#c-name').value=C.name}
+let SH=12,pi=0,pe=1,HS=[];const POS={},CP={};let WS={},so='';try{WS=JSON.parse(localStorage.getItem('yoru-w')||'{}')}catch(e){}
+const nx=i=>{for(let e=1;e<=D[i][4];e++)if(!WS[i+'-'+e])return e;return 1},wc=i=>Object.keys(WS).filter(k=>k.startsWith(i+'-')).length,saveW=()=>{try{localStorage.setItem('yoru-w',JSON.stringify(WS))}catch(e){}};
+const DB=new Promise(r=>{try{const o=indexedDB.open('yoru',1);o.onupgradeneeded=()=>o.result.createObjectStore('f');o.onsuccess=()=>r(o.result);o.onerror=()=>r(null)}catch(e){r(null)}});
+const dbx=(m,k,v)=>DB.then(d=>{if(d)try{d.transaction('f','readwrite').objectStore('f')[m](k,v)}catch(e){}});
+DB.then(d=>{if(!d)return;try{const o=d.transaction('f').objectStore('f').openCursor();o.onsuccess=()=>{const c=o.result;if(c){const k=String(c.key);if(k.startsWith('img-')){POS[k.slice(4)]=c.value;CP[k.slice(4)]=1}else if(k.startsWith('vid-')){EPV[k.slice(4)]=URL.createObjectURL(c.value)}c.continue()}else R()}}catch(e){}});
+function addImg(f){const r=new FileReader();r.onload=()=>{const m=new Image();m.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,500/m.width);c.width=m.width*k;c.height=m.height*k;c.getContext('2d').drawImage(m,0,0,c.width,c.height);const u=c.toDataURL('image/jpeg',.8);POS[cur]=u;CP[cur]=1;dbx('put',u,'img-'+cur);R();O(cur,1)};m.src=r.result};r.readAsDataURL(f)}try{HS=JSON.parse(localStorage.getItem('yoru-h')||'[]')}catch(e){}
+RX.push([/Show more/g,'عرض المزيد'],[/Add poster image/g,'أضف صورة الغلاف'],[/Remove poster/g,'احذف الصورة'],[/Reset progress/g,'إعادة ضبط التقدم'],[/Watched (\d+) of (\d+)/g,'شاهدت $1 من $2'],[/✓ Watched/g,'✓ تمت المشاهدة'],[/>Surprise me</g,'>فاجئني<'],[/>Default order</g,'>الترتيب الافتراضي<'],[/>A to Z</g,'>حسب الاسم<'],[/>Most episodes</g,'>الأكثر حلقات<'],[/(\d+) titles/g,'$1 عنوان']);
+RX.push([/>Settings</g,'>الإعدادات<'],[/>Language</g,'>اللغة<'],[/>Theme</g,'>المظهر<'],[/>Auto</g,'>تلقائي<'],[/>Dark</g,'>داكن<'],[/>Light</g,'>فاتح<'],[/>Playback</g,'>التشغيل<'],[/Autoplay next episode/g,'تشغيل الحلقة التالية تلقائيًا'],[/>Data</g,'>البيانات<'],[/Export backup/g,'تصدير نسخة احتياطية'],[/Import backup/g,'استيراد نسخة احتياطية'],[/Clear all data/g,'مسح كل البيانات'],[/Customize look/g,'تخصيص المظهر'],[/Your rating/g,'تقييمك'],[/Delete all data\?/g,'حذف كل البيانات؟']);
+const KEYS=['Your list is empty. Open any series and tap Add to My List.','No titles match. Clear the search or pick another genre.','Demo player. No video is included.','>Home<','>Browse<','>Schedule<','>My List<','>Settings<','Search titles','Continue watching','New this season','Most watched this week','>Surprise me<','>Default order<','>A to Z<','>Most episodes<','Play episode {n}','Add to My List','In My List','>Back<','>Close<','>Episodes<','>Today<','Episode {n} at ',', episode {n}','Episode {n}','{n} episodes','{n} min','✓ Watched','Watched {n} of {n}','Add poster image','Remove poster','Reset progress','Show more','{n} titles','>Pause<','>Play<','>Language<','>Theme<','>Auto<','>Dark<','>Light<','>Playback<','Autoplay next episode','>Data<','Export backup','Import backup','Clear all data','Customize look','Your rating','Delete all data?'];
+const TT={
+fr:['Votre liste est vide. Ouvrez une série et touchez Ajouter à ma liste.','Aucun résultat. Effacez la recherche ou choisissez un autre genre.','Lecteur de démonstration. Aucune vidéo incluse.','>Accueil<','>Explorer<','>Programme<','>Ma liste<','>Réglages<','Rechercher un titre','Reprendre','Nouveautés de la saison','Les plus regardés cette semaine','>Surprenez-moi<','>Ordre par défaut<','>De A à Z<','>Plus d’épisodes<','Lire l’épisode {n}','Ajouter à ma liste','Dans ma liste','>Retour<','>Fermer<','>Épisodes<','>Aujourd’hui<','Épisode {n} à ',', épisode {n}','Épisode {n}','{n} épisodes','{n} min','✓ Vu','Vu {n} sur {n}','Ajouter une affiche','Retirer l’affiche','Réinitialiser la progression','Voir plus','{n} titres','>Pause<','>Lecture<','>Langue<','>Thème<','>Auto<','>Sombre<','>Clair<','>Lecteur<','Épisode suivant automatique','>Données<','Exporter la sauvegarde','Importer une sauvegarde','Effacer toutes les données','Personnaliser l’apparence','Votre note','Supprimer toutes les données ?'],
+es:['Tu lista está vacía. Abre una serie y toca Añadir a mi lista.','Sin resultados. Borra la búsqueda o elige otro género.','Reproductor de demostración. No incluye vídeo.','>Inicio<','>Explorar<','>Calendario<','>Mi lista<','>Ajustes<','Buscar títulos','Seguir viendo','Novedades de la temporada','Lo más visto esta semana','>Sorpréndeme<','>Orden predeterminado<','>De la A a la Z<','>Más episodios<','Ver episodio {n}','Añadir a mi lista','En mi lista','>Atrás<','>Cerrar<','>Episodios<','>Hoy<','Episodio {n} a las ',', episodio {n}','Episodio {n}','{n} episodios','{n} min','✓ Visto','Visto {n} de {n}','Añadir póster','Quitar póster','Reiniciar progreso','Ver más','{n} títulos','>Pausa<','>Reproducir<','>Idioma<','>Tema<','>Auto<','>Oscuro<','>Claro<','>Reproducción<','Reproducir siguiente episodio automáticamente','>Datos<','Exportar copia de seguridad','Importar copia de seguridad','Borrar todos los datos','Personalizar apariencia','Tu valoración','¿Borrar todos los datos?'],
+tr:['Listen boş. Bir dizi aç ve Listeme ekle’ye dokun.','Sonuç yok. Aramayı temizle veya başka bir tür seç.','Demo oynatıcı. Video içermez.','>Ana sayfa<','>Keşfet<','>Program<','>Listem<','>Ayarlar<','Başlık ara','İzlemeye devam et','Bu sezonun yenileri','Bu hafta en çok izlenenler','>Şaşırt beni<','>Varsayılan sıra<','>A’dan Z’ye<','>En çok bölüm<','{n}. bölümü oynat','Listeme ekle','Listemde','>Geri<','>Kapat<','>Bölümler<','>Bugün<','{n}. bölüm, saat ',', {n}. bölüm','{n}. bölüm','{n} bölüm','{n} dk','✓ İzlendi','{n}/{n} izlendi','Afiş ekle','Afişi kaldır','İlerlemeyi sıfırla','Daha fazla','{n} yapım','>Duraklat<','>Oynat<','>Dil<','>Tema<','>Otomatik<','>Koyu<','>Açık<','>Oynatma<','Sonraki bölümü otomatik oynat','>Veri<','Yedeği dışa aktar','Yedeği içe aktar','Tüm verileri sil','Görünümü özelleştir','Puanın','Tüm veriler silinsin mi?']};
+KEYS.push('>Add episode<','>Series<','>Episode number<','>Video link<','>Save episode<','>Choose video file<','>Added episodes<','Video files stay on this device only.');
+TT.fr.push('>Ajouter un épisode<','>Série<','>Numéro de l’épisode<','>Lien vidéo<','>Enregistrer l’épisode<','>Choisir un fichier vidéo<','>Épisodes ajoutés<','Les fichiers vidéo restent sur cet appareil uniquement.');
+TT.es.push('>Añadir episodio<','>Serie<','>Número de episodio<','>Enlace de vídeo<','>Guardar episodio<','>Elegir archivo de vídeo<','>Episodios añadidos<','Los archivos de vídeo se quedan solo en este dispositivo.');
+TT.tr.push('>Bölüm ekle<','>Dizi<','>Bölüm numarası<','>Video bağlantısı<','>Bölümü kaydet<','>Video dosyası seç<','>Eklenen bölümler<','Video dosyaları yalnızca bu cihazda kalır.');
+RX.push([/>Add episode</g,'>إضافة حلقة<'],[/>Series</g,'>المسلسل<'],[/>Episode number</g,'>رقم الحلقة<'],[/>Video link</g,'>رابط الفيديو<'],[/>Save episode</g,'>حفظ الحلقة<'],[/>Choose video file</g,'>اختيار ملف فيديو<'],[/>Added episodes</g,'>الحلقات المضافة<'],[/Video files stay on this device only\./g,'ملفات الفيديو تبقى على هذا الجهاز فقط.']);
+KEYS.push('>Cloud episodes<','>Connect<','>Disconnect<','Paste your firebaseConfig here');
+TT.fr.push('>Épisodes cloud<','>Connecter<','>Déconnecter<','Collez votre firebaseConfig ici');
+TT.es.push('>Episodios en la nube<','>Conectar<','>Desconectar<','Pega aquí tu firebaseConfig');
+TT.tr.push('>Bulut bölümleri<','>Bağlan<','>Bağlantıyı kes<','firebaseConfig’i buraya yapıştır');
+RX.push([/>Cloud episodes</g,'>حلقات السحابة<'],[/>Connect</g,'>ربط<'],[/>Disconnect</g,'>فصل<'],[/Paste your firebaseConfig here/g,'الصق firebaseConfig هنا']);
+KEYS.push('>New series<');TT.fr.push('>Nouvelles séries<');TT.es.push('>Series nuevas<');TT.tr.push('>Yeni diziler<');RX.push([/>New series</g,'>مسلسلات جديدة<']);
+KEYS.push('>Refresh<','>Stats<','>Watched<','>Started<','>Rated<');
+TT.fr.push('>Actualiser<','>Statistiques<','>Épisodes vus<','>Séries commencées<','>Notes données<');
+TT.es.push('>Actualizar<','>Estadísticas<','>Episodios vistos<','>Series empezadas<','>Valoraciones<');
+TT.tr.push('>Yenile<','>İstatistikler<','>İzlenen bölümler<','>Başlanan diziler<','>Verilen puanlar<');
+RX.push([/>Refresh</g,'>تحديث<'],[/>Stats</g,'>إحصائياتي<'],[/>Watched</g,'>حلقات شاهدتها<'],[/>Started</g,'>مسلسلات بدأتها<'],[/>Rated</g,'>تقييماتك<']);
+KEYS.push('>Admin<','>Sign in<','>Sign out<','>Publish to cloud<','>Add series<','>Publish series<','"API key"','"Email"','"Password"','"Title"','"Synopsis"');
+TT.fr.push('>Administrateur<','>Se connecter<','>Se déconnecter<','>Publier dans le cloud<','>Ajouter une série<','>Publier la série<','"Clé API"','"E-mail"','"Mot de passe"','"Titre"','"Synopsis"');
+TT.es.push('>Administrador<','>Iniciar sesión<','>Cerrar sesión<','>Publicar en la nube<','>Añadir serie<','>Publicar serie<','"Clave API"','"Correo"','"Contraseña"','"Título"','"Sinopsis"');
+TT.tr.push('>Yönetici<','>Giriş yap<','>Çıkış yap<','>Buluta yayınla<','>Dizi ekle<','>Diziyi yayınla<','"API anahtarı"','"E-posta"','"Parola"','"Başlık"','"Özet"');
+RX.push([/>Admin</g,'>المشرف<'],[/>Sign in</g,'>تسجيل الدخول<'],[/>Sign out</g,'>تسجيل الخروج<'],[/>Publish to cloud</g,'>نشر في السحابة<'],[/>Add series</g,'>إضافة مسلسل<'],[/>Publish series</g,'>نشر المسلسل<'],[/"API key"/g,'"مفتاح API"'],[/"Email"/g,'"البريد الإلكتروني"'],[/"Password"/g,'"كلمة المرور"'],[/"Title"/g,'"العنوان"'],[/"Synopsis"/g,'"القصة"']);
+KEYS.push('>Glass<');TT.fr.push('>Verre<');TT.es.push('>Cristal<');TT.tr.push('>Cam<');RX.push([/>Glass</g,'>زجاجي<']);
+KEYS.push('>Preferences<','>Account<','>Content<');TT.fr.push('>Préférences<','>Compte<','>Contenu<');TT.es.push('>Preferencias<','>Cuenta<','>Contenido<');TT.tr.push('>Tercihler<','>Hesap<','>İçerik<');RX.push([/>Preferences</g,'>التفضيلات<'],[/>Account</g,'>الحساب<'],[/>Content</g,'>المحتوى<']);
+KEYS.push('>Clear glass<');TT.fr.push('>Verre transparent<');TT.es.push('>Cristal transparente<');TT.tr.push('>Şeffaf cam<');RX.push([/>Clear glass</g,'>زجاجي شفاف<']);
+KEYS.push('>Open in external player<','>Compatibility mode<','If the player shows a connection error, the site blocks embedding. Use Open in external player.');
+TT.fr.push('>Ouvrir dans un lecteur externe<','>Mode compatibilité<','Si le lecteur affiche une erreur de connexion, le site bloque l’intégration. Utilisez Ouvrir dans un lecteur externe.');
+TT.es.push('>Abrir en reproductor externo<','>Modo de compatibilidad<','Si el reproductor muestra un error de conexión, el sitio bloquea la inserción. Usa Abrir en reproductor externo.');
+TT.tr.push('>Harici oynatıcıda aç<','>Uyumluluk modu<','Oynatıcı bağlantı hatası verirse site gömmeyi engelliyor. Harici oynatıcıda aç’ı kullan.');
+RX.push([/>Open in external player</g,'>فتح في مشغل خارجي<'],[/>Compatibility mode</g,'>وضع التوافق<'],[/If the player shows a connection error, the site blocks embedding\. Use Open in external player\./g,'إذا ظهر خطأ اتصال فالموقع يمنع التضمين. استخدم فتح في مشغل خارجي.']);
+KEYS.push('>Embed template<');TT.fr.push('>Modèle d’intégration<');TT.es.push('>Plantilla de inserción<');TT.tr.push('>Gömme şablonu<');RX.push([/>Embed template</g,'>قالب التضمين<']);
+const RL={};Object.keys(TT).forEach(l=>{const f=x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),a=KEYS.map((k,j)=>{let c=0;return[new RegExp(f(k).replace(/\\\{n\\\}/g,'(\\d+)'),'g'),TT[l][j].replace(/\{n\}/g,()=>'$'+(++c))]});
+for(let j=0;j<7;j++){const e=new Date(2024,0,7+j),d=e.toLocaleDateString(l,{weekday:'long'});a.push([new RegExp('>'+e.toLocaleDateString('en',{weekday:'long'})+'<','g'),'>'+d[0].toUpperCase()+d.slice(1)+'<'])}RL[l]=a});
+/* Poster cache: download each poster once, keep it in IndexedDB, show it from the phone afterwards */
+const ZC={},ZQ={};let ZB=0;
+const ZU=u=>(typeof u=='string'&&ZC[u])||u;
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+const ZL=DB.then(d=>new Promise(r=>{if(!d)return r();try{const o=d.transaction('f').objectStore('f').openCursor();o.onsuccess=()=>{const c=o.result;if(c){const k=String(c.key);if(k.startsWith('pc-')&&c.value instanceof Blob)ZC[k.slice(3)]=URL.createObjectURL(c.value);c.continue()}else r()};o.onerror=()=>r()}catch(e){r()}})).then(()=>{if(Object.keys(ZC).length)R()});
+async function ZD(){if(ZB)return;ZB=1;try{await ZL;const us=[...new Set(Object.values(POS).filter(u=>typeof u=='string'&&/^https?:/.test(u)&&!ZC[u]&&!ZQ[u]))];let n=0;for(const u of us){ZQ[u]=1;try{let r;try{r=await fetch(u,{mode:'cors',cache:'force-cache'})}catch(x){r=await fetch(u,{mode:'cors',referrerPolicy:'no-referrer',cache:'force-cache'})}if(!r.ok)continue;const b=await r.blob();if(!b.type.startsWith('image/'))continue;ZC[u]=URL.createObjectURL(b);dbx('put',b,'pc-'+u);if(++n%10==0)R()}catch(e){}}if(n)R()}finally{ZB=0}}
+setInterval(ZD,4000);setTimeout(ZD,1500);
+const bg=i=>POS[i]?`;background:url(${ZU(POS[i])}) center/cover`:'';
+function hist(i){HS=[i,...HS.filter(x=>x!=i)].slice(0,8);try{localStorage.setItem('yoru-h',JSON.stringify(HS))}catch(e){}}
+/* Embed support: iframe/embed links vs direct video files */
+/* Embed template fallback: uses AniList id + episode number when no link is saved */
+let AL={},ALQ={},ET='https://animeembed.com/embed/ani/{id}/{ep}?track=sub&autoPlay=1&muted=0&autoSkip=1&autoNext=0&start=0&accent=9b87ff';try{AL=JSON.parse(localStorage.getItem('yoru-al')||'{}');const x=localStorage.getItem('yoru-et');if(x!==null)ET=x}catch(e){}
+const emb=(i,e)=>{const id=D[i][6]||AL[D[i][0]];return ET&&id?ET.replace('{id}',id).replace('{ep}',e):''};
+const EU=(i,e)=>EPV[i+'-'+e]||emb(i,e);
+async function alId(i){const t=D[i][0];try{const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:'query($s:String){Media(search:$s,type:ANIME){id}}',variables:{s:t}})}),j=await r.json(),id=j.data&&j.data.Media&&j.data.Media.id;if(id){AL[t]=id;sv('yoru-al',AL)}}catch(x){}}
+const EXT=!/^https?:$/.test(location.protocol);
+let CM=1,PLR=null,HL=null;const killP=()=>{try{PLR&&PLR.destroy()}catch(x){}PLR=null;try{HL&&HL.destroy()}catch(x){}HL=null};
+const isE=u=>{if(typeof u!='string')return false;if(/^\s*<iframe/i.test(u))return true;if(/\.(mp4|webm|ogv|ogg|mov|m4v|m3u8)(\?|#|$)/i.test(u)||/^blob:/i.test(u))return false;return /(ok\.ru\/videoembed|\/embed|\/e\/|\/v\/|\/player|iframe|youtu\.be|drive\.google\.com|vk\.com\/video_ext|streamtape|doodstream|mp4upload|vidmoly|voe\.sx|filemoon|uqload|ok\.ru\/video\/|dailymotion\.com|vimeo\.com|streamable\.com)/i.test(u)};
+const eu=u=>{u=String(u).trim();const m=u.match(/src\s*=\s*["']([^"']+)/i);if(m)u=m[1];if(u.startsWith('//'))u='https:'+u;const a=document.createElement('textarea');a.innerHTML=u;u=a.value;const y=u.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w-]{11})/);if(y)u='https://www.youtube.com/embed/'+y[1];const k=u.match(/^https?:\/\/ok\.ru\/video\/(\d+)/);if(k)u='https://ok.ru/videoembed/'+k[1];const g=u.match(/drive\.google\.com\/file\/d\/([\w-]+)/);if(g)u='https://drive.google.com/file/d/'+g[1]+'/preview';const dm=u.match(/dailymotion\.com\/video\/(\w+)/);if(dm)u='https://www.dailymotion.com/embed/video/'+dm[1];const vm=u.match(/^https?:\/\/vimeo\.com\/(\d+)/);if(vm)u='https://player.vimeo.com/video/'+vm[1];const sm=u.match(/^https?:\/\/streamable\.com\/(\w+)$/);if(sm)u='https://streamable.com/e/'+sm[1];return u.replace(/"/g,'&quot;')};
+function NX(){if(AP&&EU(pi,pe+1))PL(pi,pe+1)}
+const st=m=>{$('#st').textContent=m?(AR?'تعذر تحميل البوسترات ('+m+'). افتح الملف المحمّل في المتصفح لا داخل Claude.':'Posters could not load ('+m+'). Open the downloaded file in your browser, not inside Claude.'):''};
+const JK='yoru-jk';let JC={};try{JC=JSON.parse(localStorage.getItem(JK)||'{}')}catch(e){}
+const up=u=>!u||typeof u!='string'?u:u.includes('anilist.co')?u.replace(/\/cover\/(medium|large)\//,'/cover/extraLarge/'):u.includes('kitsu')?u.replace(/\/(tiny|small|medium)\.(jpg|jpeg|png)/,'/large.$2'):u.includes('myanimelist.net')?u.replace(/\/(\d+)\.(jpg|webp)(\?.*)?$/,'/$1l.$2$3'):u;
+async function fp(t){const q=encodeURIComponent(t);let ok=0;
+try{const r=await fetch('https://graphql.anilist.co',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:'query($s:String){Media(search:$s,type:ANIME){coverImage{extraLarge large}}}',variables:{s:t}})});ok=1;if(r.ok){const j=await r.json(),u=j.data&&j.data.Media&&j.data.Media.coverImage&&(j.data.Media.coverImage.extraLarge||j.data.Media.coverImage.large);if(u)return u}}catch(e){}
+try{const r=await fetch('https://kitsu.io/api/edge/anime?page[limit]=1&filter[text]='+q);ok=1;if(r.ok){const j=await r.json(),u=j.data&&j.data[0]&&j.data[0].attributes&&j.data[0].attributes.posterImage&&(j.data[0].attributes.posterImage.large||j.data[0].attributes.posterImage.medium);if(u)return u}}catch(e){}
+try{const r=await fetch('https://api.jikan.moe/v4/anime?q='+q+'&limit=1');ok=1;if(r.ok){const j=await r.json(),u=j.data&&j.data[0]&&j.data[0].images&&(j.data[0].images.jpg.large_image_url||j.data[0].images.jpg.image_url);if(u)return u}}catch(e){}
+if(!ok)throw new Error('Failed to fetch');return ''}
+async function jikan(){let n=0;D.forEach((d,i)=>{if(!POS[i]&&JC[d[0]]){POS[i]=up(JC[d[0]]);n++}});if(n)R();
+for(let i=0;i<D.length;i++){if(POS[i])continue;try{const u=up(await fp(D[i][0]));if(u){JC[D[i][0]]=u;if(!CP[i])POS[i]=u;if(AD&&FC&&!CP[i])pub('posters/'+i,{url:{stringValue:u}}).catch(()=>{});try{localStorage.setItem(JK,JSON.stringify(JC))}catch(e){}if(i%8==7)R()}}catch(e){st(e&&e.message||'blocked');return}await new Promise(r=>setTimeout(r,750))}st('');R()}
+function LG(){applyC();const e=document.documentElement;e.dir=AR?'rtl':'ltr';e.lang=LN;TH=='auto'?e.removeAttribute('data-theme'):e.dataset.theme=TH;$('#lg').textContent=LNM[LS[(LS.indexOf(LN)+1)%LS.length]]}
+let SP='',view="home",q="",gen="All",L=[],tm,pos=0,pl=true;
+try{L=JSON.parse(localStorage.getItem("yoru-list")||"[]")}catch(e){}
+const save=()=>{try{localStorage.setItem("yoru-list",JSON.stringify(L))}catch(e){}};
+const P=(i)=>`<div class="p" style="--h:${D[i][2]}${bg(i)}"><i>${D[i][3]}</i><b>${D[i][0]}</b></div>`;
+const card=(i,w)=>`<button class="c" data-o="${i}">${P(i)}<small>${gn(D[i][1])}, ${D[i][4]} episodes</small>${w?`<u style="--w:${w}%"></u>`:""}</button>`;
+const row=(t,x)=>`<h2>${t}</h2><div class="r">${x}</div>`;
+const lb=i=>L.includes(i)?"In My List":"Add to My List";
+const hc=F=>{const d=D[F];return `<div class="hero" style="--h:${d[2]}${bg(F)}"><i>${d[3]}</i><div><h1>${d[0]}</h1><p>${gn(d[1])}, ${d[4]} episodes</p><p>${syn(F)}</p><div class="bt"><button class="pb" data-p="${F}" data-e="${nx(F)}">Play episode ${nx(F)}</button><button class="gb" data-l="${F}">${lb(F)}</button></div></div></div>`};
+const H=()=>{const F=C.feat,hl=[F,...[0,1,2,3,4,5,6,7].filter(x=>x!=F).slice(0,4)];return `<div class="hs">${hl.map(hc).join('')}</div>`
++`<div style="margin:10px 16px"><button class="gb" data-rn="1">Surprise me</button></div>`
++(HS.length?row("Continue watching",HS.map(i=>card(i,Math.round(wc(i)/D[i][4]*100))).join("")):"")
++(D.length>D0?row("New series",D.slice(D0).map((_,j)=>card(D0+j)).join("")):"")+row("New this season",D.map((_,i)=>card(i)).join(""))
++row("Most watched this week",[4,6,7,5].map(i=>card(i)).join(""))};
+const B=()=>`<h1 class="pt">Browse</h1><input id="q" type="search" placeholder="Search titles" aria-label="Search titles"><div class="ch">${["All",...new Set(D.map(d=>d[1]))].map(g=>`<button class="${g==gen?"on":""}" data-g="${g}">${gn(g)}</button>`).join("")}</div><select id="so" aria-label="Sort"><option value="">Default order</option><option value="az">A to Z</option><option value="ep">Most episodes</option></select><div id="gr" class="g"></div>`;
+const G=()=>{const r=D.map((_,i)=>i).filter(i=>(gen=="All"||D[i][1]==gen)&&D[i][0].toLowerCase().includes(q.toLowerCase())).sort((a,b)=>so=='az'?D[a][0].localeCompare(D[b][0]):so=='ep'?D[b][4]-D[a][4]:0);$("#gr").innerHTML=r.length?r.map(i=>card(i)).join(""):`<p class="em">No titles match. Clear the search or pick another genre.</p>`;TR($("#gr"))};
+const S=()=>{const n=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],t=new Date().getDay();let h=`<h1 class="pt">Schedule</h1>`;
+for(let k=0;k<7;k++){const dy=(t+k)%7;h+=`<h2>${k?n[dy]:"Today"}</h2>`+[[(dy*2)%8,"09:00"],[(dy*2+3)%8,"17:30"]].map(([i,tm])=>`<button class="s" data-o="${i}">${P(i)}<span><strong>${D[i][0]}</strong><small>Episode ${1+(dy+i)%D[i][4]} at ${tm}</small></span></button>`).join("")}
+return h};
+const M=()=>`<h1 class="pt">My List</h1>`+(L.length?`<p class="mu" style="margin:0 16px 12px">${L.length} titles, ${L.reduce((a,i)=>a+D[i][4],0)} episodes</p><div class="g">${L.map(i=>card(i)).join("")}</div>`:`<p class="em">Your list is empty. Open any series and tap Add to My List.</p>`);
+function R(s){LG();$("#v").innerHTML={home:H,browse:B,sched:S,list:M,set:ST}[view]();TR($("#v"));if(view=="browse"){$("#q").value=q;$("#so").value=so;G()}
+document.querySelectorAll("nav button").forEach(b=>{b.classList.toggle("on",b.dataset.v==view);b.textContent=AR?NA[b.dataset.v]:tr('>'+NE[b.dataset.v]+'<').slice(1,-1)});if(s)scrollTo(0,0)}
+function O(i,k){cur=i;if(!k)SH=12;const d=D[i];$("#d").innerHTML=`<button class="x" data-x="d">Back</button><div class="dh" style="--h:${d[2]}${bg(i)}"><i>${d[3]}</i></div><div class="db"><h1>${d[0]}</h1><p class="mu">${gn(d[1])}, ${d[4]} episodes</p><p>${syn(i)}</p><div class="bt"><button class="pb" data-p="${i}" data-e="${nx(i)}">Play episode ${nx(i)}</button><button class="gb" data-l="${i}">${lb(i)}</button></div><p class="mu">Your rating</p><div class="st5">${[1,2,3,4,5].map(n=>`<button class="${n<=(RT[i]||0)?'on':''}" data-rt="${n}" aria-label="${n}">★</button>`).join('')}</div>${wc(i)?`<p class="mu">Watched ${wc(i)} of ${d[4]}</p>`:''}<button class="gb lb" onclick="$('#fp').click()">Add poster image</button>${CP[i]?`<button class="gb lb" data-rp="${i}">Remove poster</button>`:''}${wc(i)?`<button class="gb lb" data-rs="${i}">Reset progress</button>`:''}<h2 style="margin-left:0">Episodes</h2>${Array.from({length:Math.max(Math.min(d[4],SH),...Object.keys(EPV).filter(k=>k.startsWith(i+'-')).map(k=>+k.split('-')[1]))},(_,k)=>`<button class="ep" data-p="${i}" data-e="${k+1}"><span>${k+1}</span>Episode ${k+1}<em>${WS[i+'-'+(k+1)]?'✓ Watched':'24 min'}</em></button>`).join("")}${d[4]>SH?`<button class="gb" data-m="1" style="margin-top:12px">Show more</button>`:''}</div>`;TR($("#d"));if($("#d").hidden)history.pushState(0,"");$("#d").hidden=false}
+function PL(i,e){e=+e;killP();if(!EPV[i+'-'+e]&&ET&&!D[i][6]&&!AL[D[i][0]]&&!ALQ[i]){ALQ[i]=1;alId(i).then(()=>{ALQ[i]=0;if(!$('#pl').hidden&&pi==i&&pe==e)PL(i,e)})}pi=i;pe=e;hist(i);WS[i+'-'+e]=1;saveW();const d=D[i];$("#pl").innerHTML=`<button class="x" data-x="pl">Close</button>${EU(i,e)?(isE(EU(i,e))?(EXT?`<div class="scr" style="--h:${d[2]}${bg(i)}"><i>${d[3]}</i></div>`:`<div class="ef iframe-container"><iframe src="${eu(EU(i,e))}" allowfullscreen allow="autoplay; fullscreen; picture-in-picture; encrypted-media; clipboard-write" referrerpolicy="origin" ${CM?'':'sandbox="allow-scripts allow-same-origin allow-presentation allow-forms allow-popups"'} frameborder="0"></iframe></div>`):`<video id="plv" controls autoplay playsinline onended="NX()" src="${EU(i,e)}"></video>`):`<div class="scr" style="--h:${d[2]}"><i>${d[3]}</i></div>`}<div class="ct"><h2 style="margin-left:0">${d[0]}, episode ${e}</h2>${EU(i,e)&&!isE(EU(i,e))?`<div class="bt"><button class="gb" data-pv="p">⏮</button><button class="gb" data-pv="b">−10</button><button class="gb" data-pv="f">+10</button><button class="gb" data-pv="i">⏩85</button><button class="gb" data-pv="z">😴${SM||''}</button><button class="gb" data-pv="n">⏭</button><button class="gb" data-pv="s">1×</button></div>`:EU(i,e)?`<div class="bt"><button class="gb" data-pv="p">⏮</button><button class="gb" data-pv="n">⏭</button><button class="pb" data-oe="1" style="${EXT?'flex:1 1 100%;font-size:1.1rem;padding:15px 20px':''}">Open in external player</button><button class="gb" data-cm="1">${CM?'✓ ':''}Compatibility mode</button></div><p class="mu">If the player shows a connection error, the site blocks embedding. Use Open in external player.</p>`:`<div class="bar"><u id="pg"></u></div><div class="bt"><button class="pb" id="tg">Pause</button></div><p class="mu">Demo player. No video is included.</p>`}</div>`;
+TR($("#pl"));const kk=i+"-"+e,vv=$("#pl video");if(vv&&PS[kk])vv.addEventListener("loadedmetadata",()=>{vv.currentTime=PS[kk]*vv.duration/100});if(vv&&/\.m3u8(\?|#|$)/i.test(EU(i,e)||'')&&window.Hls&&Hls.isSupported()){try{HL=new Hls();HL.loadSource(EU(i,e));HL.attachMedia(vv)}catch(x){HL=null}}
+if(vv&&typeof Plyr!='undefined'){try{PLR=new Plyr(vv,{controls:['play-large','rewind','play','fast-forward','progress','current-time','duration','mute','volume','settings','pip','airplay','fullscreen'],seekTime:10,speed:{selected:1,options:[.75,1,1.25,1.5,2]},keyboard:{focused:true,global:false},tooltips:{controls:true,seek:true},ratio:null})}catch(x){PLR=null}}
+if($("#pl").hidden)history.pushState(0,"");$("#pl").hidden=false;pos=PS[kk]||0;pl=true;if($("#pg"))$("#pg").style.width=pos+"%";clearInterval(tm);tm=setInterval(()=>{if(pl){pos=Math.min(100,pos+.5);if($("#pg"))$("#pg").style.width=pos+"%"}},300)}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const k=b.dataset;
+if(k.v){view=k.v;SP='';R(true)}
+else if(k.o!==undefined)O(+k.o)
+else if(k.p!==undefined)PL(+k.p,k.e||1)
+else if(k.l!==undefined){const i=+k.l;L=L.includes(i)?L.filter(x=>x!=i):[...L,i];save();R();if(!$("#d").hidden)O(i)}
+else if(k.rn){O(Math.floor(Math.random()*D.length))}
+else if(k.rp!==undefined){const i=+k.rp;delete CP[i];POS[i]=JC[D[i][0]];if(!POS[i])delete POS[i];dbx('delete','img-'+i);R();O(i,1)}
+else if(k.rs!==undefined){const i=+k.rs;Object.keys(WS).forEach(x=>{if(x.startsWith(i+'-'))delete WS[x]});saveW();R();O(i,1)}
+else if(k.ae){const u=($('#ae-u').value||'').trim(),key=AE.s+'-'+AE.n;if(u){EV[key]=u;EPV[key]=u;sv('yoru-ev',EV);dbx('delete','vid-'+key);AE.n++;R()}}else if(k.af){$('#fv').click()}else if(k.de){delete EV[k.de];delete EPV[k.de];sv('yoru-ev',EV);dbx('delete','vid-'+k.de);R()}
+else if(k.pv){const v=$('#pl video');if(!v)return;if(k.pv=='b')v.currentTime-=10;else if(k.pv=='f')v.currentTime+=10;else if(k.pv=='i')v.currentTime+=85;else if(k.pv=='z'){const m=[0,15,30,60][([0,15,30,60].indexOf(SM)+1)%4];SM=m;clearTimeout(SZ);if(m)SZ=setTimeout(()=>{const w=$('#pl video');if(w)w.pause()},m*6e4);b.textContent='😴'+(m||'')}else if(k.pv=='s'){const r=[1,1.25,1.5,2,.75],n=r[(r.indexOf(v.playbackRate)+1)%r.length]||1;v.playbackRate=n;b.textContent=n+'×'}else if(k.pv=='n'){if(EU(pi,pe+1))PL(pi,pe+1)}else if(k.pv=='p'){if(EU(pi,pe-1))PL(pi,pe-1)}}
+else if(k.fb){const v=$('#fb-c').value,a=(v.match(/apiKey["']?\s*:\s*["']([^"']+)/)||[])[1],q=(v.match(/projectId["']?\s*:\s*["']([^"']+)/)||[])[1];if(q){FC={apiKey:a||'',projectId:q};sv('yoru-fb',FC);CS='';R();cloud()}}else if(k.fx){FC=null;D.length=D0;try{localStorage.removeItem('yoru-cc')}catch(e){}Object.keys(CV).forEach(x=>{delete EPV[x];delete CV[x]});try{localStorage.removeItem('yoru-fb')}catch(e){}CS='';R()}
+else if(k.si){const K=$('#ad-k').value.trim(),E=$('#ad-e').value.trim();fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+K,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:E,password:$('#ad-p').value,returnSecureToken:true})}).then(r=>r.json()).then(j=>{if(j.idToken){AD={k:K,r:j.refreshToken,t:j.idToken,x:Date.now()+j.expiresIn*1000,e:E};sv('yoru-ad',AD);AM=''}else AM=(j.error&&j.error.message)||'error';R()}).catch(()=>{AM='offline';R()})}
+else if(k.sx){AD=null;try{localStorage.removeItem('yoru-ad')}catch(e){}AM='';R()}
+else if(k.pa){(async()=>{let n=0;for(let i=0;i<D.length;i++){const u=POS[i];if(typeof u=='string'&&u.startsWith('http')){try{await pub('posters/'+i,{url:{stringValue:u}});n++}catch(e){AM='error '+e;R();return}}}AM='✓ '+n;R()})()}
+else if(k.pq){const i=+$('#ap-s').value,u=($('#ap-u').value||'').trim();if(!u)return;pub('posters/'+i,{url:{stringValue:u}}).then(()=>{POS[i]=u;AM='✓ '+D[i][0];R()}).catch(e=>{AM='error '+e;R()})}
+else if(k.pe){const u=($('#ae-u').value||'').trim(),key=AE.s+'-'+AE.n;if(!u)return;pub('episodes/'+key,{url:{stringValue:u}}).then(()=>{AE.n++;AM='✓ '+key;return cloud()}).catch(e=>{AM='error '+e;R()})}
+else if(k.ps){const t=$('#as-t').value.trim();if(!t)return;const ix=D.length;pub('series/'+(ix-D0+1),{title:{stringValue:t},genre:{stringValue:$('#as-g').value},episodes:{integerValue:String(Math.max(1,+$('#as-e').value||1))},synopsis:{stringValue:$('#as-s').value.trim()}}).then(()=>{AM='✓ #'+ix;return cloud()}).catch(e=>{AM='error '+e;R()})}
+else if(k.rf){CS='';R();cloud()}else if(k.sp!==undefined){SP=k.sp;R(true)}else if(k.oe){window.open(eu(EU(pi,pe)).replace(/&quot;/g,'"'),'_blank','noopener')}else if(k.cm){CM=!CM;PL(pi,pe)}else if(k.lang){setLang(k.lang)}else if(k.th){TH=k.th;sv('yoru-th',TH);if(C.bg){C.bg='';saveC()}R()}else if(k.ap){AP=!AP;sv('yoru-ap',AP?'1':'0');R()}else if(k.rt!==undefined){RT[cur]=RT[cur]==+k.rt?0:+k.rt;sv('yoru-rt',RT);O(cur,1)}else if(k.ex){exp()}else if(k.im){$('#fi').click()}else if(k.clr){if(confirm(tr('Delete all data?'))){BK.forEach(x=>{try{localStorage.removeItem(x)}catch(e){}});location.reload()}}
+else if(k.g){gen=k.g;R()}else if(k.m){SH+=24;O(cur,1)}
+else if(k.x){history.back()}
+else if(b.id=='cb'||b.id=='cb2'){CU();history.pushState(0,'');$('#cu').hidden=false}else if(b.id=='c-reset'){C={...C0};saveC();applyC();CU();R()}else if(b.id=='lg'){setLang(LS[(LS.indexOf(LN)+1)%LS.length])}else if(b.id=='tg'){pl=!pl;b.textContent=t(pl?'Pause':'Play')}});
+document.addEventListener("input",e=>{const i=e.target.id;if(i=="q"){q=e.target.value;G()}else if(i=='so'){so=e.target.value;G()}else if(i=='et-u'){ET=e.target.value.trim();try{localStorage.setItem('yoru-et',ET)}catch(x){}}else if(i=='ae-s'){AE.s=+e.target.value}else if(i=='ae-n'){AE.n=Math.max(1,+e.target.value||1)}else if(i&&i.startsWith('c-')){const v=e.target.value;if(i=='c-name')C.name=v;if(i=='c-a')C.a=v;if(i=='c-b')C.b=v;if(i=='c-bg')C.bg=v;if(i=='c-rad')C.rad=+v;if(i=='c-f')C.feat=+v;saveC();applyC();if(i=='c-f')R()}});
+document.addEventListener('change',e=>{if(e.target.id=='fv'){const f=e.target.files[0];if(f){const key=AE.s+'-'+AE.n;dbx('put',f,'vid-'+key);EPV[key]=URL.createObjectURL(f);delete EV[key];sv('yoru-ev',EV);AE.n++;R()}e.target.value=''}if(e.target.id=='fi'){const f=e.target.files[0];if(f)f.text().then(x=>{try{const o=JSON.parse(x);BK.forEach(k=>{if(o[k]!=null)localStorage.setItem(k,o[k])});location.reload()}catch(z){}});e.target.value=''}if(e.target.id=='fp'){const f=e.target.files[0];if(f)addImg(f);e.target.value=''}});
+const FBC={apiKey:'AIzaSyAeD4i8rB2SPMpRdzHxfkHH8SzV_5Hs3nc',projectId:'tamaka-f1b33'};/* للنشر: ضع هنا apiKey و projectId ليعمل على كل الأجهزة، مثل {apiKey:'...',projectId:'...'} */
+let FC=(()=>{try{return JSON.parse(localStorage.getItem('yoru-fb')||'null')}catch(e){return null}})()||(FBC.projectId?FBC:null),CS='';const CV={},LK=()=>Object.keys(EPV).filter(x=>!CV[x]);
+let SM=0,SZ=0,AM='',AD=null;try{AD=JSON.parse(localStorage.getItem('yoru-ad')||'null')}catch(e){}const D0=D.length;try{const c=JSON.parse(localStorage.getItem('yoru-cc')||'null');if(c&&FC){c.s.forEach(x=>D.push(x));Object.keys(c.e).forEach(k=>{EPV[k]=c.e[k];CV[k]=1})}}catch(e){}
+async function fcol(c){let t='',a=[];do{const r=await fetch('https://firestore.googleapis.com/v1/projects/'+FC.projectId+'/databases/(default)/documents/'+c+'?pageSize=300'+(FC.apiKey?'&key='+FC.apiKey:'')+(t?'&pageToken='+t:''));if(!r.ok)throw r.status;const j=await r.json();a.push(...(j.documents||[]));t=j.nextPageToken||''}while(t);return a}
+async function cloud(){if(!FC||!FC.projectId)return;try{const sr=await fcol('series'),er=await fcol('episodes'),g=(d,k)=>{const f=d.fields&&d.fields[k];return f?(f.stringValue!=null?f.stringValue:f.integerValue):''};D.length=D0;sr.sort((x,y)=>x.name.localeCompare(y.name,'en',{numeric:true})).forEach(d=>{const i=D.length;D.push([g(d,'title')||'Untitled',g(d,'genre')||'Action',(i*47+20)%360,K[i%K.length],+g(d,'episodes')||12,g(d,'synopsis')||''])});Object.keys(CV).forEach(x=>{delete EPV[x];delete CV[x]});let n=0;er.forEach(d=>{const id=d.name.split('/').pop(),u=g(d,'url');if(u&&/^\d+-\d+$/.test(id)){EPV[id]=u;CV[id]=1;n++}});try{(await fcol('posters')).forEach(d=>{const i=+d.name.split('/').pop(),u=g(d,'url');if(u&&!CP[i])POS[i]=up(u)})}catch(e){}CS=n;sv('yoru-cc',{s:D.slice(D0),e:Object.fromEntries(Object.keys(CV).map(k=>[k,EPV[k]]))});R()}catch(e){CS=typeof e=='number'?'error '+e:'offline';R()}}
+async function au(){if(!AD)throw 401;if(AD.x>Date.now()+6e4)return AD.t;const r=await fetch('https://securetoken.googleapis.com/v1/token?key='+AD.k,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+AD.r});if(!r.ok)throw 401;const j=await r.json();AD.t=j.id_token;AD.r=j.refresh_token;AD.x=Date.now()+j.expires_in*1000;sv('yoru-ad',AD);return AD.t}
+async function pub(path,fields){const t=await au(),r=await fetch('https://firestore.googleapis.com/v1/projects/'+FC.projectId+'/databases/(default)/documents/'+path,{method:'PATCH',headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'},body:JSON.stringify({fields})});if(!r.ok)throw r.status}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)cloud()});
+const ST=()=>{const P={pref:['Preferences',`<div class="sg"><h2>Language</h2><div class="ch">${LS.map(l=>`<button class="${l==LN?'on':''}" data-lang="${l}">${LNM[l]}</button>`).join('')}</div></div><div class="sg"><h2>Theme</h2><div class="ch">${[['auto','Auto'],['dark','Dark'],['light','Light'],['glass','Glass'],['clear','Clear glass']].map(([v,n])=>`<button class="${v==TH?'on':''}" data-th="${v}">${n}</button>`).join('')}</div><button class="gb" id="cb2">Customize look</button></div><div class="sg"><h2>Playback</h2><button class="gb" data-ap="1">${AP?'✓ ':''}Autoplay next episode</button></div>`],acct:['Account',`<div class="sg"><h2>Admin</h2>${AD?`<p class="mu" dir="ltr">${AD.e}</p><button class="gb" data-sx="1">Sign out</button>`:`<input id="ad-k" dir="ltr" placeholder="API key" value="${FC&&FC.apiKey||''}"><input id="ad-e" type="email" dir="ltr" placeholder="Email"><input id="ad-p" type="password" dir="ltr" placeholder="Password"><button class="pb" data-si="1">Sign in</button>`}${AM?`<p class="mu" dir="ltr">${AM}</p>`:''}</div>${AD?`<div class="sg"><h2>${AR?'الأغلفة':'Posters'}</h2><p class="mu">${AR?'انشر الأغلفة الظاهرة عندك لتظهر على كل الأجهزة':'Publish the posters shown here so every device sees them'}</p><button class="pb" data-pa="1">${AR?'نشر كل الأغلفة':'Publish all posters'}</button><p class="mu" style="margin-top:14px">${AR?'غلاف مسلسل برابط':'Poster by link'}</p><select id="ap-s">${D.map((d,i)=>`<option value="${i}">${d[0]}</option>`).join('')}</select><input id="ap-u" type="url" dir="ltr" placeholder="https://"><button class="pb" data-pq="1">${AR?'نشر الغلاف':'Publish poster'}</button></div>`:''}${AD?`<div class="sg"><h2>Add series</h2><input id="as-t" placeholder="Title"><select id="as-g">${['Action','Adventure','Comedy','Drama','Fantasy','Mystery','Romance','Sports','Sci-fi'].map(g=>`<option value="${g}">${gn(g)}</option>`).join('')}</select><input id="as-e" type="number" min="1" value="12"><input id="as-s" placeholder="Synopsis"><button class="pb" data-ps="1">Publish series</button></div>`:''}`],cont:['Content',`<div class="sg"><h2>Cloud episodes</h2><p class="mu">${CS===''?'…':typeof CS=='number'?CS+' episodes':CS}</p><button class="gb" data-rf="1">Refresh</button></div><div class="sg"><h2>Embed template</h2><p class="mu">{id} = AniList id, {ep} = episode</p><input id="et-u" type="text" dir="ltr" value="${ET.replace(/"/g,'&quot;')}"></div><div class="sg"><h2>Add episode</h2><p class="mu">Series</p><select id="ae-s">${D.map((d,i)=>`<option value="${i}"${i==AE.s?' selected':''}>${d[0]}</option>`).join('')}</select><p class="mu">Episode number</p><input id="ae-n" type="number" min="1" value="${AE.n}"><p class="mu">Video link</p><input id="ae-u" type="url" dir="ltr" placeholder="https://"><button class="pb" data-ae="1">Save episode</button>${AD?`<button class="pb" data-pe="1">Publish to cloud</button>`:''}<button class="gb" data-af="1">Choose video file</button><p class="mu">Video files stay on this device only.</p>${LK().length?`<h2 style="margin-top:14px">Added episodes</h2>`+LK().map(x=>{const[a,n]=x.split('-');return`<button class="gb" data-de="${x}">✕ ${D[a][0]} · Episode ${n}</button>`}).join(''):''}</div>`],stats:['Stats',`<div class="sg"><h2>Stats</h2><div class="sw"><span>Watched</span><b>${Object.keys(WS).length}</b></div><div class="sw"><span>Started</span><b>${new Set(Object.keys(WS).map(k=>k.split('-')[0])).size}</b></div><div class="sw"><span>Rated</span><b>${Object.values(RT).filter(x=>x).length}</b></div></div>`],data:['Data',`<div class="sg"><h2>Data</h2><button class="gb" data-ex="1">Export backup</button><button class="gb" data-im="1">Import backup</button><button class="gb" data-clr="1">Clear all data</button></div>`]};
+if(P[SP])return `<button class="gb" data-sp="" style="margin:10px 16px 0">Back</button><h1 class="pt"><span>${P[SP][0]}</span></h1>`+P[SP][1];
+return `<h1 class="pt">Settings</h1><div class="sg" style="padding:4px 12px">${Object.keys(P).map(k=>`<button class="mr" data-sp="${k}"><span>${P[k][0]}</span><i></i></button>`).join('')}</div>`};
+function setLang(l){LN=l;AR=l=='ar';sv('yoru-lang',l);sv('yoru-ar',AR?'1':'0');['d','pl','cu'].forEach(x=>$('#'+x).hidden=true);killP();clearInterval(tm);$('#pl').innerHTML='';R(true)}
+function exp(){const o={};BK.forEach(k=>o[k]=localStorage.getItem(k));const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o)],{type:'application/json'}));a.download='yoru-backup.json';a.click()}
+function svp(){const k=pi+'-'+pe,v=$('#pl video'),p=v&&v.duration?v.currentTime/v.duration*100:pos;if(p>=97||p<1)delete PS[k];else PS[k]=p;sv('yoru-ps',PS)}
+function cl(x){if($('#'+x).hidden)return;if(x=='pl'){clearTimeout(SZ);SM=0;svp();killP();clearInterval(tm);$('#pl').innerHTML=''}$('#'+x).hidden=true}
+addEventListener('popstate',()=>{const x=['pl','cu','d'].find(y=>!$('#'+y).hidden);if(x)cl(x)});
+addEventListener('keydown',e=>{if(e.key=='Escape'&&['pl','cu','d'].some(y=>!$('#'+y).hidden))history.back()});
+R();cloud();jikan();
+</script>
+</body>
+</html>
